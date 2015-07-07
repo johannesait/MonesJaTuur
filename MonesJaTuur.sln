@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonesJaTuur", "Login\MonesJaTuur.csproj", "{C2AAEE35-0E7E-40AF-BEE7-1013247DF763}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application Layer", "Login\Application Layer.csproj", "{C2AAEE35-0E7E-40AF-BEE7-1013247DF763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

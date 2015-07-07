@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ApplicationLayer.Models
 {
-    public class Contact
+    public class Contact2
     {
-        public int ContactId { get; set; }
-        public String Name { get; set; }
+        public int Id { get; set; }
+        public String name { get; set; }
     }
 }
