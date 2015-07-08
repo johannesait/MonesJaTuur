@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using ApplicationLayer.Models;
+﻿using DataLayer;
+using System.Web.Mvc;
 
 namespace IdentitySample.Controllers
 {
@@ -9,11 +9,11 @@ namespace IdentitySample.Controllers
         {
             using (var context = new DataContext())
             {
-                context.Contacts.Add(new Contact {Name = "ssds"});
+                context.Contacts.Add(new Contact { Name = "aauu", Name2 = "aaaa" });
                 context.SaveChanges();
             }
+
             return View();
-            
         }
 
         [Authorize]

@@ -5,7 +5,7 @@ namespace ApplicationLayer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationLayer.Models.DataContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<IdentitySample.Models.ApplicationDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace ApplicationLayer.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(ApplicationLayer.Models.DataContext context)
+        protected override void Seed(IdentitySample.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
