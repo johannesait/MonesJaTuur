@@ -3,6 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using IdentitySample.Models;
 
 namespace IdentitySample.Models
 {
@@ -26,14 +29,14 @@ namespace IdentitySample.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, ApplicationLayer.Migrations.Configuration>("DefaultConnection"));
         }
 
         static ApplicationDbContext()
         {
-            // Set the database intializer which is run once during application start
-            // This seeds the database with admin user credentials and admin role
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            //Set database initializer and seed the database with initial data
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, ApplicationLayer.Migrations.Configuration>("DefaultConnection"));
+            ApplicationDbContext context = new ApplicationDbContext();
+            context.Database.Initialize(false);
         }
 
         public static ApplicationDbContext Create()
