@@ -17,9 +17,7 @@ namespace ApplicationLayer.Areas.Account
             context.MapRoute(
         "Account_default",
         "Account/{controller}/{action}/{id}",
-        new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-        new string[] { "Login.Areas.Account.Contollers" }
-            );
+        new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

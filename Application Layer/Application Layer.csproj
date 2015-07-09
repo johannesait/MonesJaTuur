@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ApplicationLayer</RootNamespace>
-    <AssemblyName>Application Layer</AssemblyName>
+    <AssemblyName>ApplicationLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -160,6 +160,7 @@
     <Content Include="Areas\Account\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Account\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Account\Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -231,7 +232,6 @@
     <Content Include="Areas\Account\Views\Account\DisplayEmail.cshtml" />
     <Content Include="Areas\Account\Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Areas\Account\Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
