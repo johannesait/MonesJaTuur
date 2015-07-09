@@ -45,8 +45,6 @@ namespace ApplicationLayer.Areas.Account.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-
-
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -389,7 +387,7 @@ namespace ApplicationLayer.Areas.Account.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         //
@@ -426,7 +424,7 @@ namespace ApplicationLayer.Areas.Account.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
