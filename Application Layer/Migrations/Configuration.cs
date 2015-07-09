@@ -19,6 +19,7 @@ namespace ApplicationLayer.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
+        //comment
         //seeds the database with initial data
         //currently this method runs every time the application is started
         protected override void Seed(ApplicationLayer.Areas.Account.Models.ApplicationDbContext context)
