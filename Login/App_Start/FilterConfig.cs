@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Login
+namespace ApplicationLayer
 {
     public class FilterConfig
     {

@@ -1,4 +1,4 @@
-﻿using Login.Models;
+﻿using ApplicationLayer.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using Login.Areas.Account.Models;
+using ApplicationLayer.Areas.Account.Models;
 
-namespace Login.Areas.Account.Controllers
+namespace ApplicationLayer.Areas.Account.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller

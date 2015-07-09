@@ -2,12 +2,12 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Login.Models;
+using ApplicationLayer.Models;
 using Owin;
 using System;
-using Login.Areas.Account.Models;
+using ApplicationLayer.Areas.Account.Models;
 
-namespace Login
+namespace ApplicationLayer
 {
     public partial class Startup
     {

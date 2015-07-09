@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using Login.Models;
-using Login.Controllers;
+using ApplicationLayer.Models;
+using ApplicationLayer.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -10,9 +10,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Login.Areas.Account.Models;
+using ApplicationLayer.Areas.Account.Models;
 
-namespace Login.Areas.Account.Controllers
+namespace ApplicationLayer.Areas.Account.Controllers
 {
     [Authorize]
     public class AccountController : Controller

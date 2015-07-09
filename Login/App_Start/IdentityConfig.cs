@@ -11,9 +11,9 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Net.Mail;
-using Login.Areas.Account.Models;
+using ApplicationLayer.Areas.Account.Models;
 
-namespace Login.Models
+namespace ApplicationLayer.Models
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 

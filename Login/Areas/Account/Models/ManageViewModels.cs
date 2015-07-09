@@ -3,7 +3,7 @@ using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Login.Areas.Account.Models
+namespace ApplicationLayer.Areas.Account.Models
 {
     public class IndexViewModel
     {

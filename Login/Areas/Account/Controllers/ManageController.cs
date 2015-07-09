@@ -1,5 +1,5 @@
-﻿using Login.Areas.Account.Models;
-using Login.Models;
+﻿using ApplicationLayer.Areas.Account.Models;
+using ApplicationLayer.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Login.Areas.Account.Controllers
+namespace ApplicationLayer.Areas.Account.Controllers
 {
     [Authorize]
     public class ManageController : Controller
