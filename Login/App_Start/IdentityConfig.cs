@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using System.Data.Entity;
+using System.Net.Mail;
 
 namespace IdentitySample.Models
 {
@@ -87,7 +87,23 @@ namespace IdentitySample.Models
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            //dynamic email = new Email("Default");
+            //email.To = message.Destination;
+            //email.From = "vanossit@gmail.com";
+            //email.Subject = message.Subject;
+            //email.Message = message.Body;
+            //email.SendAsync();
+
+            MailMessage mail = new MailMessage();
+            SmtpClient smtpServer = new SmtpClient();
+
+            mail.From = new MailAddress("vanossit@gmail.com");
+            mail.To.Add(message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            smtpServer.Send(mail);
             return Task.FromResult(0);
         }
     }

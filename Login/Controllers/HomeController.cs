@@ -7,12 +7,6 @@ namespace IdentitySample.Controllers
     {
         public ActionResult Index()
         {
-            using (var context = new DataContext())
-            {
-                context.Contacts.Add(new Contact { Name = "aauu", Name2 = "aaaa" });
-                context.SaveChanges();
-            }
-
             return View();
         }
 
