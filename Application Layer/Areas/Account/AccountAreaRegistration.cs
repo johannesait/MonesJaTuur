@@ -15,9 +15,10 @@ namespace ApplicationLayer.Areas.Account
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Account_default",
-                "Account/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+        "Account_default",
+        "Account/{controller}/{action}/{id}",
+        new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+        new string[] { "Login.Areas.Account.Contollers" }
             );
         }
     }
