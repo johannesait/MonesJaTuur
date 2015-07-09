@@ -1,12 +1,12 @@
 ﻿using Owin;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
-using IdentitySample.Models;
+using Login.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 
-namespace IdentitySample
+namespace Login
 {
     public partial class Startup
     {

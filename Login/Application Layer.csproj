@@ -115,6 +115,7 @@
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -151,6 +152,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Areas\Account\Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -182,42 +184,42 @@
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\UsersAdmin\Index.cshtml" />
-    <Content Include="Views\UsersAdmin\Edit.cshtml" />
-    <Content Include="Views\UsersAdmin\Details.cshtml" />
-    <Content Include="Views\UsersAdmin\Delete.cshtml" />
-    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Areas\Account\Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Areas\Account\Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Areas\Account\Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Areas\Account\Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Areas\Account\Views\UsersAdmin\Create.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\RolesAdmin\Index.cshtml" />
-    <Content Include="Views\RolesAdmin\Edit.cshtml" />
-    <Content Include="Views\RolesAdmin\Details.cshtml" />
-    <Content Include="Views\RolesAdmin\Delete.cshtml" />
-    <Content Include="Views\RolesAdmin\Create.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Areas\Account\Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Areas\Account\Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Areas\Account\Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Areas\Account\Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Areas\Account\Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\SetPassword.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Account\Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Areas\Account\Views\Account\VerifyCode.cshtml" />
+    <Content Include="Areas\Account\Views\Account\SendCode.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ResetPassword.cshtml" />
+    <Content Include="Areas\Account\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Account\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Areas\Account\Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Areas\Account\Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Areas\Account\Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -226,19 +228,20 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RolesAdminController.cs" />
-    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Areas\Account\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Account\Controllers\RolesAdminController.cs" />
+    <Compile Include="Areas\Account\Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Areas\Account\Models\AccountViewModels.cs" />
+    <Compile Include="Areas\Account\Models\AdminViewModel.cs" />
+    <Compile Include="Areas\Account\Models\IdentityModels.cs" />
+    <Compile Include="Areas\Account\Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -247,6 +250,10 @@
       <Project>{26d71740-48cd-4b65-85ac-e5fb3160c8ef}</Project>
       <Name>Data Layer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -263,7 +270,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59029</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58961/</IISUrl>
+          <IISUrl>http://localhost:59029/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

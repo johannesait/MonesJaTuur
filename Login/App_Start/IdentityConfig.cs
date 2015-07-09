@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using System.Data.Entity;
+using Login.Areas.Account.Models;
 
-namespace IdentitySample.Models
+namespace Login.Models
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 

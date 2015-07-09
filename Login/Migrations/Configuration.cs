@@ -6,11 +6,12 @@ namespace ApplicationLayer.Migrations
     using System.Linq;
     using System.Web;
     using Microsoft.AspNet.Identity.Owin;
-    using IdentitySample.Models;
+    using Login.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Login.Areas.Account.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<IdentitySample.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Login.Areas.Account.Models.ApplicationDbContext>
     {
         public Configuration()
         {
@@ -20,7 +21,7 @@ namespace ApplicationLayer.Migrations
 
         //seeds the database with initial data
         //currently this method runs every time the application is started
-        protected override void Seed(IdentitySample.Models.ApplicationDbContext context)
+        protected override void Seed(Login.Areas.Account.Models.ApplicationDbContext context)
         {
             var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context));
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));

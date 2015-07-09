@@ -1,7 +1,7 @@
 ﻿using DataLayer;
 using System.Web.Mvc;
 
-namespace IdentitySample.Controllers
+namespace Login.Controllers
 {
     public class HomeController : Controller
     {
