@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/sb-admin-2/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/Content/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/wiselinks/wiselinks-1.2.2.min.js"></script>
+    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/wiselinks/coffeeScripts/coffee")"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        alert("yyyy");
+        $("a").attr("data-push", true);
+    });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -35,7 +50,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" id="content">
         @RenderBody()
         <hr />
         <footer>
@@ -43,8 +58,9 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Html.Partial("_Scripts")
+
 </body>
 </html>

@@ -1,0 +1,108 @@
+﻿<script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+<script src="~/Scripts/metisMenu/metisMenu.js"></script>
+<script src="~/Scripts/sb-admin-2/sb-admin-2.js"></script>
+<script src="~/Scripts/metisMenu/metisMenu.js"></script>
+<script src="~/Scripts/notify/notify.min.js"></script>
+
+<script type="text/javascript">
+    function showSuccess() {
+        close
+        $.notify("Save successful!", {
+            className: "success",
+            position: "top center"
+        });
+
+        $(".hideAfterSuccess").hide();
+
+        return false;
+    };
+
+    function showError() {
+        $.notify("An error occured", {
+            className: "error",
+            position: "top center"
+        });
+        return false;
+    };
+
+    var initSubmitButtonHandler = function (formId) {
+        $("#submit").click(function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var f = $("#" + formId);
+            var isValid = $(f).valid();
+
+            if (isValid) {
+                $("#submit").addClass("disabled");
+
+                $.ajax({
+                    url: $("#" + formId).attr("action"),
+                    type: 'POST',
+                    data: $(f).serialize(),
+                    success: function (data, textStatus) {
+                        if (textStatus == "success") {
+                            var form = document.getElementById(formId);
+                            form.reset();
+                            showSuccess();
+                        }
+                        else
+                            showError();
+                    },
+                    complete: function (data) {
+                        $("#submit").removeClass("disabled");
+                    }
+                })
+            }
+            else {
+                showError();
+            }
+        });
+    };
+
+    var initDialog = function (dialogId) {
+        $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+            _title: function (title) {
+                if (!this.options.title) {
+                    title.html("&#160;");
+                } else {
+                    title.html(this.options.title);
+                }
+            }
+        }));
+
+        $("#" + dialogId).dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            title: "<div class='widget-header'><h4>Confirm</h4></div>"
+        });
+    };
+
+    var initDeleteDialog = function (id, title, functionCall, yes, cancel) {
+        $("#" + id).dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            title: "<div class='widget-header'><h4>" + title + "</h4></div>",
+            buttons: [{
+                html: "<i class='fa fa-check'></i>&nbsp; " + yes,
+                "class": "btn btn-primary",
+                click: function (e) {
+                    e.stopImmediatePropagation();
+                    $(this).dialog("close");
+                    functionCall.apply();
+                }
+            }, {
+                html: "<i class='fa fa-times'></i>&nbsp; " + cancel,
+                "class": "btn btn-default",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }]
+        });
+    };
+
+    $(document).ready(function () {
+
+    });
+</script>

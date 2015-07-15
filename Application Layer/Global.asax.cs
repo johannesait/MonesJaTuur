@@ -14,10 +14,14 @@ namespace ApplicationLayer
     {
         protected void Application_Start()
         {
+            var coffeeBundle = new DynamicFolderBundle("coffee", "*.coffee", new CoffeeCompiler() );
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleTable.Bundles.Add(coffeeBundle);
+            BundleTable.Bundles.GetRegisteredBundles();
         }
     }
 }

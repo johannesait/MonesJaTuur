@@ -14,7 +14,7 @@
     <RootNamespace>ApplicationLayer</RootNamespace>
     <AssemblyName>ApplicationLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -44,11 +44,20 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="CoffeeScriptHttpHandler">
+      <HintPath>..\packages\CoffeeSharp.0.6\lib\CoffeeScriptHttpHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="CoffeeSharp">
+      <HintPath>..\packages\CoffeeSharp.0.6\lib\CoffeeSharp.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\packages\CoffeeSharp.0.6\lib\Jurassic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0-alpha1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -150,6 +159,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Content\metisMenu\metisMenu.css" />
+    <Content Include="Content\sb-admin-2\sb-admin-2.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -160,7 +174,29 @@
     <Content Include="Areas\Account\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Account\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Account\Views\Shared\Lockout.cshtml" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\history\native.history.js" />
+    <Content Include="Scripts\jquery\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery\jquery.js" />
+    <Content Include="Scripts\jquery\jquery.min.js" />
+    <Content Include="Scripts\metisMenu\metisMenu.js" />
+    <Content Include="Scripts\notify\notify.min.js" />
+    <Content Include="Scripts\sb-admin-2\sb-admin-2.js" />
+    <Content Include="Scripts\wiselinks\application.js" />
+    <Content Include="Scripts\wiselinks\wiselinks-1.2.2.min.js" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Scripts.cshtml" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\wiselinks.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_dom_parser.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_form.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_link.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_page.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_request_manager.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\_response.js.coffee" />
+    <Content Include="Scripts\wiselinks\coffeeScripts\application.js.coffee" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,23 +205,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
+    <None Include="Scripts\jquery\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
+    <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -241,6 +273,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Controllers\AccountController.cs" />
+    <Compile Include="CoffeeCompiler.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
     <Compile Include="Areas\Account\Controllers\RolesAdminController.cs" />
@@ -280,7 +313,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59029</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost</IISUrl>
+          <IISUrl>http://localhost:59029/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
