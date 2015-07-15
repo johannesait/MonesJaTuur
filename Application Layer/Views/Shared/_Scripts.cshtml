@@ -25,31 +25,29 @@
         return false;
     };
 
-    var initSubmitButtonHandler = function (formId) {
-        $("#submit").click(function (e) {
+        $("body").on("click", "#submit", function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
-            var f = $("#" + formId);
+            var f = $(this).closest("form");
             var isValid = $(f).valid();
 
             if (isValid) {
-                $("#submit").addClass("disabled");
+                $(this).addClass("disabled");
 
                 $.ajax({
-                    url: $("#" + formId).attr("action"),
+                    url: $(f).attr("action"),
                     type: 'POST',
                     data: $(f).serialize(),
                     success: function (data, textStatus) {
                         if (textStatus == "success") {
-                            var form = document.getElementById(formId);
-                            form.reset();
+                            $(f)[0].reset();
                             showSuccess();
                         }
                         else
                             showError();
                     },
                     complete: function (data) {
-                        $("#submit").removeClass("disabled");
+                        $(this).removeClass("disabled");
                     }
                 })
             }
@@ -57,7 +55,6 @@
                 showError();
             }
         });
-    };
 
     var initDialog = function (dialogId) {
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {

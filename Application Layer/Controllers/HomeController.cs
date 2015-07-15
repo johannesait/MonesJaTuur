@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using ApplicationLayer.Areas.Account.Models;
+using DataLayer;
 using System.Web.Mvc;
 
 namespace ApplicationLayer.Controllers
@@ -7,6 +8,10 @@ namespace ApplicationLayer.Controllers
     {
         public ActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Account" });
+            }
             return View();
         }
 
