@@ -56,6 +56,8 @@ namespace ApplicationLayer.Areas.Account.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
+            if (Request.IsAjaxRequest())
+                return PartialView(RoleManager.Roles);
             return View(RoleManager.Roles);
         }
 
@@ -89,7 +91,11 @@ namespace ApplicationLayer.Areas.Account.Controllers
         // GET: /Roles/Create
         public ActionResult Create()
         {
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            else return View();
         }
 
         //
@@ -125,7 +131,9 @@ namespace ApplicationLayer.Areas.Account.Controllers
                 return HttpNotFound();
             }
             RoleViewModel roleModel = new RoleViewModel { Id = role.Id, Name = role.Name };
-            return View(roleModel);
+            if (Request.IsAjaxRequest())
+                return PartialView(roleModel);
+            else return View(roleModel);
         }
 
         //
@@ -146,37 +154,16 @@ namespace ApplicationLayer.Areas.Account.Controllers
         }
 
         //
-        // GET: /Roles/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var role = await RoleManager.FindByIdAsync(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
-        }
-
-        //
         // POST: /Roles/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id, string deleteUser)
+        public async Task<JsonResult> DeleteConfirmed(string id, string deleteUser)
         {
             if (ModelState.IsValid)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
                 var role = await RoleManager.FindByIdAsync(id);
                 if (role == null)
                 {
-                    return HttpNotFound();
+                    return Json(new { Success = false });
                 }
                 IdentityResult result;
                 if (deleteUser != null)
@@ -190,11 +177,11 @@ namespace ApplicationLayer.Areas.Account.Controllers
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                    return Json(new { Success = false });
                 }
-                return RedirectToAction("Index");
+                return Json(new { Success = true });
             }
-            return View();
+            return Json(new { Success = false });
         }
     }
 }

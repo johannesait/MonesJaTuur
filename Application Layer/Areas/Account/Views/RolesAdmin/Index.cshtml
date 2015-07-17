@@ -1,52 +1,52 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
 }
 
-<div style="display:none;">
-    <div id="deleteConfirmDialog">
-        Are you sure you would like to delete this role?
-    </div>
-</div>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create"@*, null, new { data_push = true }*@)
+<h2>Roles <small>OVERVIEW</small></h2>
+<hr/>
 
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="RolesAdmin" class="table table-hover table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
-            </td>
-        </tr>
-    }
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a href='@Html.ActionLink("Delete", "Delete", new { id = item.Id })' class=" glyphicon glyphicon-remove" value="@item.Id"></a>
+                </td>
+            </tr>
+        @Html.ActionLink(item.Name, "Edit", new { id = item.Id }, new { data_push = true, @style = "display: none;", @class = "clickable-row", @id = item.Id })
+        }
+    }
+    </tbody>
 </table>
+@Html.ActionLink("Create New", "Create", null, new { @style = "display: none;", @class = "createLink" })
+<div class="col-md-12 form-actions-light row">
+    <button class="btn btn-labeled btn-primary" id="createButton">
+        Create new
+    </button>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
-        //initDialog(deleteConfirmDialog);
-        //initDeleteDialog("deleteConfirmDialog", "Confirm delete", "Yes", "Cancel");
-        //$(".delete").on("click", function () {
-
-        //});
+        initDialog("deleteConfirmDialog");
+        initDeleteDialog("deleteConfirmDialog", "Confirm delete", deleteItem, "Yes", "Cancel");
     });
 </script>

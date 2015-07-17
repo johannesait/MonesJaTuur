@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using ApplicationLayer.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApplicationLayer.Areas.Account.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Display(Name = "Firstname")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Lastname")]
         public string LastName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -1,18 +1,23 @@
 ﻿@model ApplicationLayer.Areas.Account.Models.EditUserViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Users";
 }
 
-<h2>Edit.</h2>
+<h2>Users <small>EDIT</small></h2>
+<hr />
 
-
-@using (Html.BeginForm()) {
+@using (Ajax.BeginForm("Edit", "", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "showSuccess",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        }, new { @id = "usersAdminForm", @class = "row" }))
+{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Edit User Form.</h4>
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
@@ -36,7 +41,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" id="submit" />
             </div>
         </div>
     </div>
@@ -45,7 +50,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

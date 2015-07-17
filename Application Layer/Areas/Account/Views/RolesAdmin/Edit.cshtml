@@ -1,24 +1,29 @@
 ﻿@model ApplicationLayer.Areas.Account.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Roles";
 }
 
-<h2>Edit.</h2>
+<h2>Roles <small>EDIT</small></h2>
+<hr/>
 
-
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("Edit", "", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "showSuccess",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        }, new { @id = "rolesAdminForm", @class = "row" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Roles.</h4>
-        <hr />
+
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, "Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name)
@@ -27,7 +32,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" id="submit" />
             </div>
         </div>
     </div>
@@ -36,7 +41,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

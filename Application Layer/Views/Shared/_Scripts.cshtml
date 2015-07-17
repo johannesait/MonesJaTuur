@@ -1,12 +1,16 @@
-﻿<script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+﻿<script src="~/Scripts/jquery/jquery-ui.min.js"></script>
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+<script src="~/Scripts/wiselinks/wiselinks-1.2.2.min.js"></script>
+<script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/wiselinks/coffeeScripts/coffee")"></script>
 <script src="~/Scripts/metisMenu/metisMenu.js"></script>
 <script src="~/Scripts/sb-admin-2/sb-admin-2.js"></script>
-<script src="~/Scripts/metisMenu/metisMenu.js"></script>
 <script src="~/Scripts/notify/notify.min.js"></script>
+
 
 <script type="text/javascript">
     function showSuccess() {
-        close
         $.notify("Save successful!", {
             className: "success",
             position: "top center"
@@ -25,36 +29,99 @@
         return false;
     };
 
-        $("body").on("click", "#submit", function (e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            var f = $(this).closest("form");
-            var isValid = $(f).valid();
+    function showDeleteSuccess() {
+        $.notify("Item deleted!", {
+            className: "success",
+            position: "top center"
+        });
+        return false;
+    };
 
-            if (isValid) {
-                $(this).addClass("disabled");
+    if ($(".navbar-static-top").length == 0)
+        $("#page-wrapper").css("margin", 0);
 
-                $.ajax({
-                    url: $(f).attr("action"),
-                    type: 'POST',
-                    data: $(f).serialize(),
-                    success: function (data, textStatus) {
-                        if (textStatus == "success") {
-                            $(f)[0].reset();
-                            showSuccess();
+    $("body").on("click", "tr[id]", function () {
+        $("#" + ($(this).attr("id"))).trigger("click");
+    });
+
+    $("body").on("click", "#submit", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var f = $(this).closest("form");
+        var isValid = $(f).valid();
+
+        if (isValid) {
+            $(this).addClass("disabled");
+
+            $.ajax({
+                url: $(f).attr("action"),
+                type: 'POST',
+                data: $(f).serialize(),
+                success: function (data, textStatus) {
+                    $.ajax({
+                        url: $(f).attr("action"),
+                        type: 'GET',
+                        success: function (data) {
+                            $("#content").html(data);
                         }
-                        else
-                            showError();
-                    },
-                    complete: function (data) {
-                        $(this).removeClass("disabled");
+                    })
+                    if (textStatus == "success") {
+                        //$(f)[0].reset();
+                        showSuccess();
                     }
-                })
-            }
-            else {
+                    else
+                        showError();
+                },
+                complete: function (data) {
+                    $("#submit").removeClass("disabled");
+                    $('#content :input[type!=hidden]').first().focus();
+                }
+            })
+        }
+        else {
+            showError();
+        }
+    });
+
+    $("body").on("click", "#createButton", function () {
+        $(".createLink").trigger("click");
+    });
+
+    $("body").on("click", ".glyphicon-remove", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $('#deleteConfirmDialog').dialog('open');
+        $(this).attr("clicked", true);
+    });
+
+    var deleteItem = function () {
+        var id = $("[clicked=true]").attr("value");
+        var controller = $(".table").attr("id");
+        var deleteUrl = '@Url.Action("Delete", "_controller_", new { id = "_id_", area = "Account" })'.replace("_id_", id).replace("_controller_", controller);
+        $.ajax({
+            type: 'POST',
+            url: deleteUrl,
+            success: function (data) {
+                showDeleteSuccess();
+                refreshIndex();
+            },
+            error: function () {
                 showError();
             }
         });
+    };
+
+    var refreshIndex = function () {
+        var controller = $(".table").attr("id");
+        var url = '@Url.Action("Index", "_controller_", new {area = "Account"})'.replace("_controller_", controller);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $("#content").html(data);
+            }
+        })
+    };
 
     var initDialog = function (dialogId) {
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
@@ -66,20 +133,13 @@
                 }
             }
         }));
-
-        $("#" + dialogId).dialog({
-            autoOpen: false,
-            resizable: false,
-            modal: true,
-            title: "<div class='widget-header'><h4>Confirm</h4></div>"
-        });
     };
 
     var initDeleteDialog = function (id, title, functionCall, yes, cancel) {
         $("#" + id).dialog({
             autoOpen: false,
             resizable: false,
-            modal: true,
+            modal: false,
             title: "<div class='widget-header'><h4>" + title + "</h4></div>",
             buttons: [{
                 html: "<i class='fa fa-check'></i>&nbsp; " + yes,
@@ -100,6 +160,7 @@
     };
 
     $(document).ready(function () {
-
+        $("a").attr("data-push", true);
+        $('#content :input[type!=hidden]').first().focus();
     });
 </script>

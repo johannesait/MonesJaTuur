@@ -1,10 +1,11 @@
 ﻿@model ApplicationLayer.Areas.Account.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Roles";
 }
 
-<h2>Create.</h2>
+<h2>Roles <small>CREATE</small></h2>
+<hr />
 
 @using (Ajax.BeginForm("Create", "", new AjaxOptions
         {
@@ -17,12 +18,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
+
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, "Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name)

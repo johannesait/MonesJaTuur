@@ -10,4 +10,5 @@ $(document).ready ->
                 console.log("Wiselinks page loading completed")
                 # code to stop loading animation
                 $("a").attr("data-push", true)
+                $('#content :input[type!=hidden]').first().focus()
         )

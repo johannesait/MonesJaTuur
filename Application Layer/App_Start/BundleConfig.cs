@@ -8,8 +8,7 @@ namespace ApplicationLayer
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery/jquery-1.10.2.js",
-                        "~/Scripts/jquery/jquery-ui.min.js"
+                        "~/Scripts/jquery/jquery-1.10.2.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

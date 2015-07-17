@@ -6,12 +6,13 @@ namespace ApplicationLayer.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Account", new { area = "Account" });
             }
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 

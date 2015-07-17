@@ -57,6 +57,8 @@ namespace ApplicationLayer.Areas.Account.Controllers
         // GET: /Users/
         public async Task<ActionResult> Index()
         {
+            if (Request.IsAjaxRequest())
+                return PartialView(await UserManager.Users.ToArrayAsync());
             return View(await UserManager.Users.ToListAsync());
         }
 
@@ -81,6 +83,8 @@ namespace ApplicationLayer.Areas.Account.Controllers
         {
             //Get the list of Roles
             ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+            if (Request.IsAjaxRequest())
+                return PartialView();
             return View();
         }
 
@@ -141,8 +145,21 @@ namespace ApplicationLayer.Areas.Account.Controllers
             }
 
             var userRoles = await UserManager.GetRolesAsync(user.Id);
-
-            return View(new EditUserViewModel()
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView(new EditUserViewModel()
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
+                    {
+                        Selected = userRoles.Contains(x.Name),
+                        Text = x.Name,
+                        Value = x.Name
+                    })
+                });
+            }
+            else return View(new EditUserViewModel()
             {
                 Id = user.Id,
                 Email = user.Email,
@@ -198,47 +215,41 @@ namespace ApplicationLayer.Areas.Account.Controllers
 
         //
         // GET: /Users/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = await UserManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //public async Task<ActionResult> Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var user = await UserManager.FindByIdAsync(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
 
         //
         // POST: /Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public async Task<JsonResult> DeleteConfirmed(string id)
         {
             if (ModelState.IsValid)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
                 var user = await UserManager.FindByIdAsync(id);
                 if (user == null)
                 {
-                    return HttpNotFound();
+                    return Json(new { Success = false });
                 }
                 var result = await UserManager.DeleteAsync(user);
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                    return Json(new { Success = false });
                 }
-                return RedirectToAction("Index");
+                return Json(new { Success = true });
             }
-            return View();
+            return Json(new { Success = false });
         }
     }
 }
