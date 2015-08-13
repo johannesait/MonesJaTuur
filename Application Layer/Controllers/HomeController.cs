@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace ApplicationLayer.Controllers
 {
+    [HandleError()]
     public class HomeController : Controller
     {
         public ActionResult Index(string returnUrl)

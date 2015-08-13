@@ -94,6 +94,10 @@
         $(this).attr("clicked", true);
     });
 
+    $(".dropdown-menu").on("click", function () {
+        $(this).parent().removeClass("open");
+    });
+
     var deleteItem = function () {
         var id = $("[clicked=true]").attr("value");
         var controller = $(".table").attr("id");

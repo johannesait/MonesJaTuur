@@ -227,7 +227,7 @@ namespace ApplicationLayer.Areas.Account.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            return PartialView();
         }
 
         //
@@ -330,6 +330,14 @@ namespace ApplicationLayer.Areas.Account.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        public ActionResult Settings()
+        {
+            if (Request.IsAjaxRequest())
+                return PartialView();
+            else
+                return View();
         }
 
         #region Helpers

@@ -3,8 +3,12 @@
 @{
     ViewBag.Title = "Error";
 }
-
-<hgroup>
-    <h1 class="text-error">Error.</h1>
-    <h2 class="text-error">An error occurred while processing your request.</h2>
-</hgroup>
+<div class="alert alert-danger" style="margin-top:20px;">
+    <hgroup>
+        <h1 class="text-error">Error.</h1>
+        <h2 class="text-error">An error occurred while processing your request.</h2>
+    </hgroup>
+    <p>
+        @Html.ActionLink("Return to home page", "Index", "Home", new { area = "" }, null)
+    </p>
+</div>
